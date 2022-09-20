@@ -12,7 +12,6 @@ import 'package:islamic_unveristy/services/local_data/share_pref.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../../shared/constant.dart';
-import '../../../home/views/screens/home_screen.dart';
 
 class WebViewCheck extends StatelessWidget {
   final Completer<WebViewController> _controller =

@@ -77,6 +77,48 @@ class MainDio {
     return newsModel;
   }
 
+  static Future<NewsModel?> getNewsWithoutToken() async {
+    final path =
+        'https://staging.iu.edu.sa/mobileapis/Services/GetNews?startIndex=0&pageSize=10&storingExpression=Id';
+    final Response request;
+    NewsModel? newsModel;
+    try {
+      request = await dio!.get(path,
+          options: Options(headers: {
+            'Accept': 'application/json',
+            'Authorization': 'kjhfjkashdfkljashflkasfhdkjhksfd',
+          }));
+      print(request.data);
+      if (request.statusCode! < 400) {
+        newsModel = NewsModel.fromJson(request.data);
+      } else {}
+    } on Exception {
+      // TODO
+    }
+    return newsModel;
+  }
+
+  static Future<NewsModel?> favouriteSer(int id, String flag) async {
+    final path =
+        'http://staging.iu.edu.sa/mobileapis/Users/SetServiceAlwaysOnTop?iuServiceId=$id&alwaysOnTop=$flag';
+    final Response request;
+    NewsModel? newsModel;
+    try {
+      request = await dio!.get(path,
+          options: Options(headers: {
+            'Accept': 'application/json',
+            'Authorization': 'kjhfjkashdfkljashflkasfhdkjhksfd',
+          }));
+      print(request.data);
+      if (request.statusCode! < 400) {
+        newsModel = NewsModel.fromJson(request.data);
+      } else {}
+    } on Exception {
+      // TODO
+    }
+    return newsModel;
+  }
+
   static Future<NotificationModel?> getNotification() async {
     print(baseUrl);
     final path =

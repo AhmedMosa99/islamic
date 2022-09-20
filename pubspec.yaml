@@ -41,12 +41,13 @@ dependencies:
   carousel_slider: ^4.1.1
   dots_indicator: ^2.1.0
   calendar_view: ^1.0.0
-  webview_flutter:
+  webview_flutter: 3.0.4
   dio: ^4.0.6
   connectivity_plus: ^2.3.6+1
   flutter_icons_helper:
   font_awesome_flutter: ^10.2.1
   getwidget: ^3.0.1
+  url_launcher: ^6.1.5
 
 dev_dependencies:
   flutter_test:

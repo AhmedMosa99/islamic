@@ -5,10 +5,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:islamic_unveristy/moduls/home/controller/home_controller.dart';
+import 'package:islamic_unveristy/moduls/home/views/screens/clender_screen.dart';
 import 'package:islamic_unveristy/moduls/home/views/screens/news.dart';
 import 'package:islamic_unveristy/moduls/home/views/screens/notification_screen.dart';
 import 'package:islamic_unveristy/utils/component/component.dart';
 import 'package:islamic_unveristy/utils/themes/light_theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'identify_screen.dart';
 
@@ -278,12 +280,17 @@ buildGridView(BuildContext context) {
       primary: true,
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
-            onTap: () {
+            onTap: () async {
               if (index == 0) {
                 Get.to(IdentifyScreen());
               }
               if (index == 1) {
                 Get.to(NewsScreen());
+              }
+              if (index == 3) {
+                Get.to(CalendarScreen());
+              } else {
+                await launchUrl(Uri.parse(logic.user!.services![index].url!));
               }
             },
             child: Container(
@@ -338,36 +345,45 @@ buildListView(BuildContext context) {
       return ListView.separated(
         itemCount: logic.user!.services!.length,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
-            decoration: BoxDecoration(color: HexaColor.fromHexa('#F2F6F9')),
-            height: 54.h,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // FaIcon((logic.helper.getIconByName('accusoft'))),
-                    FaIcon(FontAwesomeIcons.accusoft),
-                    SizedBox(
-                      width: 14.w,
-                    ),
-                    Text(
-                      logic.user!.services![index].title!,
-                      style: Theme.of(context)
-                          .textTheme
-                          .subtitle2!
-                          .copyWith(fontSize: 14.sp),
-                    ),
-                  ],
-                ),
-                Icon(
-                  Icons.star,
-                  size: 20.w,
-                  color: HexaColor.fromHexa('#E5A96B'),
-                )
-              ],
+          return InkWell(
+            onTap: () async {
+              if (await canLaunch(logic.user!.services![index].url!)) {
+                await launch(logic.user!.services![index].url!);
+              } else {
+                Get.snackbar('Error', 'Can not launch');
+              }
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
+              decoration: BoxDecoration(color: HexaColor.fromHexa('#F2F6F9')),
+              height: 54.h,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // FaIcon((logic.helper.getIconByName('accusoft'))),
+                      FaIcon(Icons.abc),
+                      SizedBox(
+                        width: 14.w,
+                      ),
+                      Text(
+                        logic.user!.services![index].title!,
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle2!
+                            .copyWith(fontSize: 14.sp),
+                      ),
+                    ],
+                  ),
+                  Icon(
+                    Icons.star,
+                    size: 20.w,
+                    color: HexaColor.fromHexa('#E5A96B'),
+                  )
+                ],
+              ),
             ),
           );
         },

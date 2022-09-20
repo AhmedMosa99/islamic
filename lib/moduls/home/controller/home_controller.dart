@@ -32,6 +32,11 @@ class HomeController extends GetxController {
     update();
   }
 
+  getNewsWithoutToken() async {
+    newsModel = await MainDio.getNewsWithoutToken();
+    update();
+  }
+
   getNotification() async {
     notificationModel = await MainDio.getNotification();
     update();
@@ -44,9 +49,11 @@ class HomeController extends GetxController {
       getUserInfo(token!);
       getNews(token!);
       getNotification();
+      getNewsWithoutToken();
     }
     if (token == null) {
       getUserInfoWithoutLogin();
+      getNewsWithoutToken();
     }
   }
 }

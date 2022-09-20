@@ -69,13 +69,9 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
+            minifyEnabled false
+            shrinkResources false
         }
-    }
-    lintOptions {
-        disable 'InvalidPackage'
-        disable "Instantiatable"
-        checkReleaseBuilds false
-        abortOnError false
     }
 }
 
