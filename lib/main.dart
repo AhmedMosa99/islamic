@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/smart_management.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:islamic_unveristy/moduls/auth/view/screen/web_view.dart';
 import 'package:islamic_unveristy/services/local_data/share_pref.dart';
 import 'package:islamic_unveristy/shared/binding.dart';
 import 'package:islamic_unveristy/shared/constant.dart';
 import 'package:islamic_unveristy/utils/languages/translation.dart';
 import 'package:islamic_unveristy/utils/themes/light_theme.dart';
-
-import 'moduls/auth/view/screen/begin_screen.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
         translations: Messages(),
         locale: Locale(lang!),
         fallbackLocale: Locale(lang!),
-        home: BeginScreen(),
+        home: WebViewCheck(),
       ),
     );
   }

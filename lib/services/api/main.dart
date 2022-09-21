@@ -101,7 +101,7 @@ class MainDio {
 
   static Future<int?> favouriteSer(int id, bool flag) async {
     final path =
-        'http://staging.iu.edu.sa/mobileapis/Users/SetServiceAlwaysOnTop?iuServiceId=$id&alwaysOnTop=${flag.toString()}';
+        'https://staging.iu.edu.sa/mobileapis/Users/SetServiceAlwaysOnTop?iuServiceId=$id&alwaysOnTop=${flag.toString()}';
     final Response request;
     print(path);
     int? newsModel;

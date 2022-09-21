@@ -1,4 +1,5 @@
 import 'package:flutter_icons_helper/flutter_icons_helper.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:islamic_unveristy/moduls/auth/models/userInfo.dart';
 import 'package:islamic_unveristy/moduls/home/models/news_model.dart';
@@ -11,6 +12,7 @@ class HomeController extends GetxController {
   NewsModel? newsModel;
   NotificationModel? notificationModel;
   User? user;
+  List<Services> list = [];
   var helper = IconHelper();
   bool isLoading = false;
   changeView(bool grid) {
@@ -21,6 +23,12 @@ class HomeController extends GetxController {
   getUserInfo(String token) async {
     isLoading = true;
     user = await MainDio.getUssrInfo(token);
+    for (int i = 0; i >= user!.services!.length; ++i) {
+      if (user!.services![i].alwaysOnTop!) {
+        list.add(user!.services![i]);
+        update();
+      }
+    }
     isLoading = false;
     update();
   }
@@ -40,7 +48,14 @@ class HomeController extends GetxController {
   favourite(int id, bool flag) async {
     if (token != null) {
       var x = await MainDio.favouriteSer(id, flag);
-      print(x);
+      await getUserInfo(token!);
+      for (int i = 0; i <= user!.services!.length; ++i) {
+        if (user!.services![i].alwaysOnTop!) {
+          list.add(user!.services![i]);
+          print(list.length);
+          update();
+        }
+      }
     }
     update();
   }
