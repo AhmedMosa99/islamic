@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:islamic_unveristy/moduls/auth/view/screen/login.dart';
-import 'package:islamic_unveristy/moduls/home/views/screens/home_screen.dart';
 import 'package:islamic_unveristy/moduls/main/views/screens/mainScreen.dart';
 import 'package:islamic_unveristy/services/local_data/share_pref.dart';
 
@@ -76,10 +75,12 @@ class _BeginScreenState extends State<BeginScreen> {
                         if (dropdownValue == "EN") {
                           Get.updateLocale(Locale("en"));
                           lang = "en";
+                          langApi = "en-GB";
                           await SharePref.setData(key: 'lang', data: lang);
                         } else if (dropdownValue == "AR") {
                           Get.updateLocale(Locale("ar"));
                           lang = "ar";
+                          langApi = "ar-SA";
                           await SharePref.setData(key: 'lang', data: lang);
                         }
                       },

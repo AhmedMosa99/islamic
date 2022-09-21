@@ -81,7 +81,7 @@ class WebViewCheck extends StatelessWidget {
                   var v = jsonDecode(x1);
                   token = v['Token'];
                   await SharePref.init();
-                  await SharePref.setData(key: 'token', data: token);
+                  await SharePref.setData(key: 'token', data: v['Token']);
                   token = await SharePref.getData(key: 'token');
                   HomeController controller = Get.put(HomeController());
                   await controller.getUserInfo(token!);

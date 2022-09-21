@@ -12,23 +12,36 @@ class HomeController extends GetxController {
   NotificationModel? notificationModel;
   User? user;
   var helper = IconHelper();
+  bool isLoading = false;
   changeView(bool grid) {
     isGrid = grid;
     update();
   }
 
   getUserInfo(String token) async {
+    isLoading = true;
     user = await MainDio.getUssrInfo(token);
+    isLoading = false;
     update();
   }
 
   getUserInfoWithoutLogin() async {
+    isLoading = true;
     user = await MainDio.getService();
+    isLoading = false;
     update();
   }
 
   getNews(String token) async {
     newsModel = await MainDio.getNews(token);
+    update();
+  }
+
+  favourite(int id, bool flag) async {
+    if (token != null) {
+      var x = await MainDio.favouriteSer(id, flag);
+      print(x);
+    }
     update();
   }
 
@@ -51,6 +64,7 @@ class HomeController extends GetxController {
       getNotification();
       getNewsWithoutToken();
     }
+    getUserInfoWithoutLogin();
     if (token == null) {
       getUserInfoWithoutLogin();
       getNewsWithoutToken();

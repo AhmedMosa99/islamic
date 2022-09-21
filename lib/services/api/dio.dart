@@ -1,9 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:islamic_unveristy/moduls/auth/view/screen/login.dart';
-import 'package:islamic_unveristy/shared/constant.dart';
-
-import '../local_data/share_pref.dart';
 
 class ApiDio {
   final dio = createDio();
@@ -26,62 +21,63 @@ class ApiDio {
           'Accept': 'application/json',
         }));
 
-    dio.interceptors.addAll({
-      AppInterceptors(),
-    });
+    // dio.interceptors.addAll({
+    //   AppInterceptors(),
+    // });
     return dio;
   }
 }
 
-class AppInterceptors extends Interceptor {
-  @override
-  void onError(DioError err, ErrorInterceptorHandler handler) async {
-    print('error');
-    // Assume 401 stands for token expired
-    if (err.response?.statusCode == 401) {
-      print('error');
-      await SharePref.init();
-      await SharePref.removeKey('token');
-      token = null;
-      // token = await SharePref.getData(key: 'token');
-      // await SharePref.setData(key: 'isRegister', data: false);
-
-      navigatorKey.currentState?.pushAndRemoveUntil(
-          MaterialPageRoute(builder: (s) {
-        return LoginScreen();
-      }), (route) => false);
-      // var options = error.response!.requestOptions;
-      // // If the token has been updated, repeat directly.
-      // if (csrfToken != options.headers['csrfToken']) {
-      //   options.headers['csrfToken'] = csrfToken;
-      //   //repeat
-      //   dio.fetch(options).then(
-      //     (r) => handler.resolve(r),
-      //     onError: (e) {
-      //       handler.reject(e);
-      //     },
-      //   );
-      //   return;
-      // }
-      // tokenDio.get('v1/get/user').then((d) {
-      //   //update csrfToken
-      //   options.headers['csrfToken'] = csrfToken = d.data['data']['token'];
-      // }).then((e) {
-      //   //repeat
-      //   dio.fetch(options).then(
-      //     (r) => handler.resolve(r),
-      //     onError: (e) {
-      //       handler.reject(e);
-      //     },
-      //   );
-      // });
-      // return;
-    }
-    // await _shouldRetry(err, handler);
-
-    return handler.next(err);
-  }
-}
+// class AppInterceptors extends Interceptor {
+//   @override
+//   void onError(DioError err, ErrorInterceptorHandler handler) async {
+//     print(err);
+//     // Assume 401 stands for token expired
+//     if (err.response?.statusCode == 401) {
+//       print('error');
+//       await SharePref.init();
+//       // await SharePref.removeKey('token');
+//       //  token = null;
+//       // token = await SharePref.getData(key: 'token');
+//       // await SharePref.setData(key: 'isRegister', data: false);
+//
+//       navigatorKey.currentState?.pushAndRemoveUntil(
+//           MaterialPageRoute(builder: (s) {
+//         return LoginScreen();
+//       }), (route) => false);
+//       // var options = error.response!.requestOptions;
+//       // // If the token has been updated, repeat directly.
+//       // if (csrfToken != options.headers['csrfToken']) {
+//       //   options.headers['csrfToken'] = csrfToken;
+//       //   //repeat
+//       //   dio.fetch(options).then(
+//       //     (r) => handler.resolve(r),
+//       //     onError: (e) {
+//       //       handler.reject(e);
+//       //     },
+//       //   );
+//       //   return;
+//       // }
+//       // tokenDio.get('v1/get/user').then((d) {
+//       //   //update csrfToken
+//       //   options.headers['csrfToken'] = csrfToken = d.data['data']['token'];
+//       // }).then((e) {
+//       //   //repeat
+//       //   dio.fetch(options).then(
+//       //     (r) => handler.resolve(r),
+//       //     onError: (e) {
+//       //       handler.reject(e);
+//       //     },
+//       //   );
+//       // });
+//       // return;
+//       return handler.next(err);
+//     }
+//     // await _shouldRetry(err, handler);
+//
+//     return handler.next(err);
+//   }
+// }
 
 // _shouldRetry(DioError err, handler) async {
 //   if (err.type == DioErrorType.other && err.error is SocketException) {

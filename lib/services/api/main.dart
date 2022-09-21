@@ -15,7 +15,7 @@ class MainDio {
   }
 
   static Future<User?> getUssrInfo(token) async {
-    final path = '${baseUrl}Users/GetMyData?culture=ar-SA';
+    final path = '${baseUrl}Users/GetMyData?culture=$langApi';
     final Response request;
     User? user;
     try {
@@ -36,7 +36,8 @@ class MainDio {
 
   static Future<User?> getService() async {
     print(baseUrl);
-    final path = 'https://staging.iu.edu.sa/mobileapis/Services/GetServices';
+    final path =
+        'https://staging.iu.edu.sa/mobileapis/Services/GetServices?culture=$langApi';
     final Response request;
     User? user;
     try {
@@ -98,20 +99,18 @@ class MainDio {
     return newsModel;
   }
 
-  static Future<NewsModel?> favouriteSer(int id, String flag) async {
+  static Future<int?> favouriteSer(int id, bool flag) async {
     final path =
-        'http://staging.iu.edu.sa/mobileapis/Users/SetServiceAlwaysOnTop?iuServiceId=$id&alwaysOnTop=$flag';
+        'http://staging.iu.edu.sa/mobileapis/Users/SetServiceAlwaysOnTop?iuServiceId=$id&alwaysOnTop=${flag.toString()}';
     final Response request;
-    NewsModel? newsModel;
+    print(path);
+    int? newsModel;
     try {
-      request = await dio!.get(path,
-          options: Options(headers: {
-            'Accept': 'application/json',
-            'Authorization': 'kjhfjkashdfkljashflkasfhdkjhksfd',
-          }));
-      print(request.data);
+      print(token);
+      request = await dio!
+          .get(path, options: Options(headers: {'Authorization': token}));
       if (request.statusCode! < 400) {
-        newsModel = NewsModel.fromJson(request.data);
+        newsModel = request.statusCode;
       } else {}
     } on Exception {
       // TODO
@@ -122,7 +121,7 @@ class MainDio {
   static Future<NotificationModel?> getNotification() async {
     print(baseUrl);
     final path =
-        '${baseUrl}Events/GetEvents?startIndex=0&pageSize=10&storingExpression=Id';
+        '${baseUrl}Events/GetEvents?startIndex=0&pageSize=10&storingExpression=Id?culture=$langApi';
     final Response request;
     NotificationModel? notificationModel;
     try {

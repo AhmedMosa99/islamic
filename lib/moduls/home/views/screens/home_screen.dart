@@ -283,11 +283,9 @@ buildGridView(BuildContext context) {
             onTap: () async {
               if (index == 0) {
                 Get.to(IdentifyScreen());
-              }
-              if (index == 1) {
+              } else if (index == 1) {
                 Get.to(NewsScreen());
-              }
-              if (index == 3) {
+              } else if (index == 3) {
                 Get.to(CalendarScreen());
               } else {
                 await launchUrl(Uri.parse(logic.user!.services![index].url!));
@@ -305,11 +303,23 @@ buildGridView(BuildContext context) {
                 children: [
                   Align(
                       alignment: Alignment.topLeft,
-                      child: Icon(
-                        Icons.star,
-                        size: 20.w,
-                        color: HexaColor.fromHexa('#E5A96B'),
-                      )),
+                      child: InkWell(
+                          onTap: () {
+                            if (logic.user!.services![index].alwaysOnTop!) {
+                              logic.favourite(
+                                  logic.user!.services![index].id!, false);
+                            } else {
+                              logic.favourite(
+                                  logic.user!.services![index].id!, true);
+                            }
+                          },
+                          child: Icon(
+                            Icons.star,
+                            size: 20.w,
+                            color: logic.user!.services![index].alwaysOnTop!
+                                ? HexaColor.fromHexa('#E5A96B')
+                                : Colors.grey,
+                          ))),
                   Center(
                     child: Image.asset(
                       'assets/images/Group.png',
@@ -377,11 +387,17 @@ buildListView(BuildContext context) {
                       ),
                     ],
                   ),
-                  Icon(
-                    Icons.star,
-                    size: 20.w,
-                    color: HexaColor.fromHexa('#E5A96B'),
-                  )
+                  InkWell(
+                      onTap: () {
+                        if (logic.user!.services![index].alwaysOnTop!) {}
+                      },
+                      child: Icon(
+                        Icons.star,
+                        size: 20.w,
+                        color: logic.user!.services![index].alwaysOnTop!
+                            ? HexaColor.fromHexa('#E5A96B')
+                            : Colors.grey,
+                      ))
                 ],
               ),
             ),
