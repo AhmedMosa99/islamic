@@ -389,7 +389,13 @@ buildListView(BuildContext context) {
                   ),
                   InkWell(
                       onTap: () {
-                        if (logic.user!.services![index].alwaysOnTop!) {}
+                        if (logic.user!.services![index].alwaysOnTop!) {
+                          logic.favourite(
+                              logic.user!.services![index].id!, false);
+                        } else {
+                          logic.favourite(
+                              logic.user!.services![index].id!, true);
+                        }
                       },
                       child: Icon(
                         Icons.star,

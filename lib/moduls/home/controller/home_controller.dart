@@ -23,12 +23,12 @@ class HomeController extends GetxController {
   getUserInfo(String token) async {
     isLoading = true;
     user = await MainDio.getUssrInfo(token);
-    for (int i = 0; i >= user!.services!.length; ++i) {
-      if (user!.services![i].alwaysOnTop!) {
-        list.add(user!.services![i]);
+    user!.services?.forEach((element) {
+      if (element.alwaysOnTop!) {
+        list.add(element);
         update();
       }
-    }
+    });
     isLoading = false;
     update();
   }
@@ -47,16 +47,11 @@ class HomeController extends GetxController {
 
   favourite(int id, bool flag) async {
     if (token != null) {
+      list = [];
       var x = await MainDio.favouriteSer(id, flag);
-      await getUserInfo(token!);
-      for (int i = 0; i <= user!.services!.length; ++i) {
-        if (user!.services![i].alwaysOnTop!) {
-          list.add(user!.services![i]);
-          print(list.length);
-          update();
-        }
-      }
+      print(x);
     }
+    await getUserInfo(token!);
     update();
   }
 

@@ -157,7 +157,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       onPressed: () async {
                         //  Get.to(() => MainScreen());
-                        await Get.offAll(WebViewCheck());
+                        await Get.offAll(() => WebViewCheck());
                       },
                     ),
                   ),
