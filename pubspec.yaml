@@ -49,6 +49,7 @@ dependencies:
   getwidget: ^3.0.1
   url_launcher: ^6.1.5
   http: ^0.13.5
+  image_utils_class: ^2.0.0
 
 dev_dependencies:
   flutter_test:

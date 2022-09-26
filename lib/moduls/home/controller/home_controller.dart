@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_icons_helper/flutter_icons_helper.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:islamic_unveristy/moduls/auth/models/userInfo.dart';
@@ -12,7 +14,10 @@ class HomeController extends GetxController {
   NewsModel? newsModel;
   NotificationModel? notificationModel;
   User? user;
+  bool isSearch = false;
+  TextEditingController search = TextEditingController();
   List<Services> list = [];
+  List<Services> listSearch = [];
   var helper = IconHelper();
   bool isLoading = false;
   changeView(bool grid) {
@@ -33,6 +38,38 @@ class HomeController extends GetxController {
     update();
   }
 
+  searchService(String query) async {
+    isSearch = true;
+    update();
+    if (query == "") {
+      getUserInfo(token!);
+      listSearch = user!.services!;
+      isSearch = false;
+      update();
+    } else {
+      listSearch = user!.services!
+          .where((e) => e.title!.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+
+      // user!.services?.forEach((element) {
+      //   if (element.title!.contains(query)) {
+      //     list.add(element);
+      //     update();
+      //     print('true');
+      //   } else {
+      //     list = [];
+      //     print('false');
+      //   }
+      //   list.map((e) => print(e.title));
+      //   user!.services = list;
+      // });
+      print(user!.services!.length);
+      user!.services = listSearch;
+      update();
+      print(listSearch.length);
+    }
+  }
+
   getUserInfoWithoutLogin() async {
     isLoading = true;
     user = await MainDio.getService();
@@ -45,10 +82,22 @@ class HomeController extends GetxController {
     update();
   }
 
-  favourite(int id, bool flag) async {
+  favourite(int id, bool flag, context) async {
     if (token != null) {
+      Get.bottomSheet(Container(
+        height: 200.h,
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+        ),
+        child: Center(
+          child: CircularProgressIndicator(
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+      ));
       list = [];
       var x = await MainDio.favouriteSer(id, flag);
+      Get.back();
       print(x);
     }
     await getUserInfo(token!);

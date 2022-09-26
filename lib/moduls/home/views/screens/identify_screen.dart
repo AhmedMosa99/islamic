@@ -35,129 +35,135 @@ class IdentifyScreen extends StatelessWidget {
             children: [
               Container(
                 padding: EdgeInsets.all(12),
-                height: 300.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: HexaColor.fromHexa('#F2F6F9')),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(3),
-                      height: 130.h,
-                      width: 116.51.w,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Container(
-                        width: 110.51.w,
-                        height: 120.14.h,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage(
-                                'assets/images/person1.jpg',
-                              ),
-                            )),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 18.w,
-                    ),
-                    Expanded(
-                        child: Column(
+                    Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "universityOrJobNumber".tr,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1!
-                              .copyWith(
-                                  color: HexaColor.fromHexa("#828282"),
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w400),
+                        Container(
+                          padding: EdgeInsets.all(3),
+                          height: 130.h,
+                          width: 116.51.w,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Container(
+                            width: 110.51.w,
+                            height: 120.14.h,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage(
+                                    'assets/images/person1.jpg',
+                                  ),
+                                )),
+                          ),
                         ),
                         SizedBox(
-                          height: 24.h,
-                          child: Text(logic.user!.userInfo!.id.toString()),
+                          width: 18.w,
                         ),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        Text(
-                          'name'.tr,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1!
-                              .copyWith(
-                                  color: HexaColor.fromHexa("#828282"),
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w400),
-                        ),
-                        Text(logic.user!.userInfo!.userName!),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        Text(
-                          'JobTitle'.tr,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1!
-                              .copyWith(
-                                  color: HexaColor.fromHexa("#828282"),
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w400),
-                        ),
-                        Text(
-                          logic.user!.userInfo!.department!,
-                          style: Theme.of(context).textTheme.bodyText2!,
-                        ),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        Text(
-                          'theSide'.tr,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1!
-                              .copyWith(
-                                  color: HexaColor.fromHexa("#828282"),
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w400),
-                        ),
-                        Text(
-                          logic.user!.userInfo!.mainDepartment!,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText2!
-                              .copyWith(fontSize: 15.sp),
-                        ),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        Text(
-                          'job position'.tr,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1!
-                              .copyWith(
-                                  color: HexaColor.fromHexa("#828282"),
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w400),
-                        ),
-                        Text(
-                          logic.user!.userInfo!.position!,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText2!
-                              .copyWith(fontSize: 15.sp),
-                        ),
+                        Expanded(
+                            child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "universityOrJobNumber".tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
+                                      color: HexaColor.fromHexa("#828282"),
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w400),
+                            ),
+                            SizedBox(
+                              height: 24.h,
+                              child: Text(logic.user!.userInfo!.id.toString()),
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            Text(
+                              'name'.tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
+                                      color: HexaColor.fromHexa("#828282"),
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w400),
+                            ),
+                            Text(logic.user!.userInfo!.userName!),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            Text(
+                              'JobTitle'.tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
+                                      color: HexaColor.fromHexa("#828282"),
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              logic.user!.userInfo!.department!,
+                              style: Theme.of(context).textTheme.bodyText2!,
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            Text(
+                              'theSide'.tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
+                                      color: HexaColor.fromHexa("#828282"),
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              logic.user!.userInfo!.mainDepartment!,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2!
+                                  .copyWith(fontSize: 15.sp),
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            Text(
+                              'job position'.tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
+                                      color: HexaColor.fromHexa("#828282"),
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              logic.user!.userInfo!.position!,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2!
+                                  .copyWith(fontSize: 15.sp),
+                            ),
+                          ],
+                        ))
                       ],
-                    ))
+                    ),
+                    SizedBox(
+                      height: 13.h,
+                    )
                   ],
                 ),
               ),
@@ -196,7 +202,7 @@ class IdentifyScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         );

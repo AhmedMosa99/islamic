@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen>
                       height: 8.h,
                     ),
                     SizedBox(
-                      height: 38.h,
+                      height: 48.h,
                       child: defaultFormField(
                           prefix: SvgPicture.asset(
                             'assets/images/search.svg',
@@ -97,7 +97,10 @@ class _HomeScreenState extends State<HomeScreen>
                           fillColor: Colors.white,
                           hintText: "search".tr,
                           borderColor: Colors.transparent,
-                          controller: null,
+                          onChange: (s) {
+                            logic.searchService(s.toString());
+                          },
+                          controller: logic.search,
                           type: TextInputType.text),
                     )
                   ],
@@ -301,25 +304,33 @@ buildGridView(BuildContext context) {
               ),
               child: Column(
                 children: [
-                  Align(
-                      alignment: Alignment.topLeft,
-                      child: InkWell(
-                          onTap: () {
-                            if (logic.user!.services![index].alwaysOnTop!) {
-                              logic.favourite(
-                                  logic.user!.services![index].id!, false);
-                            } else {
-                              logic.favourite(
-                                  logic.user!.services![index].id!, true);
-                            }
-                          },
-                          child: Icon(
-                            Icons.star,
-                            size: 20.w,
-                            color: logic.user!.services![index].alwaysOnTop!
-                                ? HexaColor.fromHexa('#E5A96B')
-                                : Colors.grey,
-                          ))),
+                  SizedBox(
+                    height: 35.h,
+                    child: Align(
+                        alignment: Alignment.topLeft,
+                        child: IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              if (logic.user!.services![index].alwaysOnTop!) {
+                                logic.favourite(
+                                    logic.user!.services![index].id!,
+                                    false,
+                                    context);
+                              } else {
+                                logic.favourite(
+                                    logic.user!.services![index].id!,
+                                    true,
+                                    context);
+                              }
+                            },
+                            icon: Icon(
+                              Icons.star,
+                              size: 20.w,
+                              color: logic.user!.services![index].alwaysOnTop!
+                                  ? HexaColor.fromHexa('#E5A96B')
+                                  : Colors.grey,
+                            ))),
+                  ),
                   Center(
                     child: Image.asset(
                       'assets/images/Group.png',
@@ -391,10 +402,10 @@ buildListView(BuildContext context) {
                       onTap: () {
                         if (logic.user!.services![index].alwaysOnTop!) {
                           logic.favourite(
-                              logic.user!.services![index].id!, false);
+                              logic.user!.services![index].id!, false, context);
                         } else {
                           logic.favourite(
-                              logic.user!.services![index].id!, true);
+                              logic.user!.services![index].id!, true, context);
                         }
                       },
                       child: Icon(

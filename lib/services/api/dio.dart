@@ -1,4 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:islamic_unveristy/moduls/auth/view/screen/web_view.dart';
+import 'package:islamic_unveristy/services/local_data/share_pref.dart';
+
+import '../../shared/constant.dart';
 
 class ApiDio {
   final dio = createDio();
@@ -28,23 +33,28 @@ class ApiDio {
   }
 }
 
-// class AppInterceptors extends Interceptor {
-//   @override
-//   void onError(DioError err, ErrorInterceptorHandler handler) async {
-//     print(err);
-//     // Assume 401 stands for token expired
-//     if (err.response?.statusCode == 401) {
-//       print('error');
-//       await SharePref.init();
-//       // await SharePref.removeKey('token');
-//       //  token = null;
+class AppInterceptors extends Interceptor {
+  @override
+  void onError(DioError err, ErrorInterceptorHandler handler) async {
+    print(err);
+    // Assume 401 stands for token expired
+    if (err.response?.statusCode == 401) {
+      print('error');
+      await SharePref.init();
+      await SharePref.removeKey('token');
+      token = null;
+      navigatorKey.currentState?.pushAndRemoveUntil(
+          MaterialPageRoute(builder: (s) {
+        return WebViewCheck();
+      }), (route) => false);
+    }
+  }
+}
+
 //       // token = await SharePref.getData(key: 'token');
 //       // await SharePref.setData(key: 'isRegister', data: false);
 //
-//       navigatorKey.currentState?.pushAndRemoveUntil(
-//           MaterialPageRoute(builder: (s) {
-//         return LoginScreen();
-//       }), (route) => false);
+//
 //       // var options = error.response!.requestOptions;
 //       // // If the token has been updated, repeat directly.
 //       // if (csrfToken != options.headers['csrfToken']) {

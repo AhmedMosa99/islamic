@@ -64,9 +64,14 @@ class NewsScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              logic.newsModel!.records![index].title!,
-                              style: Theme.of(context).textTheme.subtitle1,
+                            Expanded(
+                              child: Text(
+                                logic.newsModel!.records![index].title!,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1!
+                                    .copyWith(fontSize: 14.sp),
+                              ),
                             ),
                             Text("12/8/2022",
                                 style: Theme.of(context)

@@ -176,7 +176,7 @@ class _BeginScreenState extends State<BeginScreen> {
                         ),
                       )),
                   onPressed: () async {
-                    await Get.to(MainScreen());
+                    await Get.to(() => MainScreen());
                   },
                 ),
               ),
