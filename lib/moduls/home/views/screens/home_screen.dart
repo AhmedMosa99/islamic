@@ -398,23 +398,28 @@ buildListView(BuildContext context) {
                       ),
                     ],
                   ),
-                  InkWell(
-                      onTap: () {
-                        if (logic.user!.services![index].alwaysOnTop!) {
-                          logic.favourite(
-                              logic.user!.services![index].id!, false, context);
-                        } else {
-                          logic.favourite(
-                              logic.user!.services![index].id!, true, context);
-                        }
-                      },
-                      child: Icon(
-                        Icons.star,
-                        size: 20.w,
-                        color: logic.user!.services![index].alwaysOnTop!
-                            ? HexaColor.fromHexa('#E5A96B')
-                            : Colors.grey,
-                      ))
+                  SizedBox(
+                    height: 30.h,
+                    width: 30.w,
+                    child: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          if (logic.user!.services![index].alwaysOnTop!) {
+                            logic.favourite(logic.user!.services![index].id!,
+                                false, context);
+                          } else {
+                            logic.favourite(logic.user!.services![index].id!,
+                                true, context);
+                          }
+                        },
+                        icon: Icon(
+                          Icons.star,
+                          size: 20.w,
+                          color: logic.user!.services![index].alwaysOnTop!
+                              ? HexaColor.fromHexa('#E5A96B')
+                              : Colors.grey,
+                        )),
+                  )
                 ],
               ),
             ),
